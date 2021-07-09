@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "dgj2JZQNiSx8mXBE+mgsmTDy8ifD/DcCCvv9+2gGFuTpVCRbcKWq8Gl2bBO5HGK4bax+Kuu+xyDbqbL6X2OFVg==",
+  "success": true,
+  "projectFilePath": "c:\\repo\\SpeakEZ\\MeadowBME280\\MeadowBME280.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\h3tec\\.nuget\\packages\\fsharp.core\\5.0.2\\fsharp.core.5.0.2.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow\\0.25.0\\meadow.0.25.0.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow.contracts\\0.24.0\\meadow.contracts.0.24.0.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow.f7\\0.24.6\\meadow.f7.0.24.6.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow.foundation\\0.27.0\\meadow.foundation.0.27.0.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow.foundation.displays.graphicslibrary\\0.9.43\\meadow.foundation.displays.graphicslibrary.0.9.43.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow.foundation.displays.tftspi\\0.7.45\\meadow.foundation.displays.tftspi.0.7.45.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow.foundation.sensors.atmospheric.bme280\\0.5.44\\meadow.foundation.sensors.atmospheric.bme280.0.5.44.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\meadow.units\\0.24.0\\meadow.units.0.24.0.nupkg.sha512",
+    "C:\\Users\\h3tec\\.nuget\\packages\\wildernesslabs.meadow.assemblies\\0.8.0\\wildernesslabs.meadow.assemblies.0.8.0.nupkg.sha512"
+  ],
+  "logs": []
+}

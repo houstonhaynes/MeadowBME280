@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\h3tec\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\;C:\Program Files\dotnet\sdk\NuGetFallbackFolder</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.10.0</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="C:\Users\h3tec\.nuget\packages\" />
+    <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
+    <SourceRoot Include="C:\Program Files (x86)\Microsoft\Xamarin\NuGet\" />
+    <SourceRoot Include="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Content Include="$(NuGetPackageRoot)meadow.f7\0.24.6\contentFiles\any\netstandard2.1\netstandard.dll" Condition="Exists('$(NuGetPackageRoot)meadow.f7\0.24.6\contentFiles\any\netstandard2.1\netstandard.dll')">
+      <NuGetPackageId>Meadow.F7</NuGetPackageId>
+      <NuGetPackageVersion>0.24.6</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>netstandard.dll</TargetPath>
+      <Private>True</Private>
+      <Link>netstandard.dll</Link>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMeadow_Foundation Condition=" '$(PkgMeadow_Foundation)' == '' ">C:\Users\h3tec\.nuget\packages\meadow.foundation\0.27.0</PkgMeadow_Foundation>
+    <PkgMeadow_Foundation_Sensors_Atmospheric_Bme280 Condition=" '$(PkgMeadow_Foundation_Sensors_Atmospheric_Bme280)' == '' ">C:\Users\h3tec\.nuget\packages\meadow.foundation.sensors.atmospheric.bme280\0.5.44</PkgMeadow_Foundation_Sensors_Atmospheric_Bme280>
+    <PkgMeadow_Foundation_Displays_TftSpi Condition=" '$(PkgMeadow_Foundation_Displays_TftSpi)' == '' ">C:\Users\h3tec\.nuget\packages\meadow.foundation.displays.tftspi\0.7.45</PkgMeadow_Foundation_Displays_TftSpi>
+    <PkgMeadow_F7 Condition=" '$(PkgMeadow_F7)' == '' ">C:\Users\h3tec\.nuget\packages\meadow.f7\0.24.6</PkgMeadow_F7>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\h3tec\.nuget\packages\fsharp.core\5.0.2</PkgFSharp_Core>
+  </PropertyGroup>
+</Project>
