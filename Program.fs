@@ -1,4 +1,5 @@
 open System
+open System.Threading
 open Meadow.Devices
 open Meadow
 open Meadow.Foundation
@@ -20,14 +21,14 @@ type MeadowApp() =
                                 MeadowApp.Device.Pins.D01,  
                                 MeadowApp.Device.Pins.D00 )
 
-    let graphics = new GraphicsLibrary(display)
+    let graphics = GraphicsLibrary(display)
 
     let displayWidth = Convert.ToInt32(display.Width)
     let displayHeight = Convert.ToInt32(display.Height)
     let originX = displayWidth / 2
     let originY = displayHeight / 2
 
-    let LoadScreen = 
+    let loadScreen = 
         Console.WriteLine "Loading Screen..."
         graphics.DrawCircle(originX, originY, 125, Color.Green, true, true)
         graphics.DrawCircle(originX, originY, 108, Color.Black, true, true)
@@ -39,13 +40,17 @@ type MeadowApp() =
         graphics.DrawText(179, 102, "EZ", Color.HotPink, GraphicsLibrary.ScaleFactor.X2)
         graphics.Show()
 
-    do LoadScreen
+    do loadScreen
 
 
     // set up sensor
-    //let i2c = MeadowApp.Device.CreateI2cBus()
-    //let sensor = new Bme280 (i2c, Bme280.I2cAddress.Adddress0x76)
-    let observer = Bme280.CreateObserver(Handler: Result => Console.Writeline "Observer: Temp changed by threshold; new temp: {Units.Temperature.UnitType.Fahrenheit}F, old: {Units.Temperature.UnitType.Fahrenheit}F")
+    let i2c = MeadowApp.Device.CreateI2cBus()
+    let sensor = Bme280 (i2c, Bme280.I2cAddress.Adddress0x76)
+    let consumer = Bme280.CreateObserver(fun result -> printfn "Temperature is {result.New.Temperature.Celcius:N2}, Humidity is {}, Pressure is {}")
+
+    let s = sensor.Subscribe(consumer)
+
+    do sensor.StartUpdating(TimeSpan.FromSeconds(2.0))
 
     // boilerplate LED stuff
     let led =
