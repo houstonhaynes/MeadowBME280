@@ -46,7 +46,7 @@ type MeadowApp() =
     // set up sensor
     let i2c = MeadowApp.Device.CreateI2cBus()
     let sensor = Bme280 (i2c, Bme280.I2cAddress.Adddress0x76)
-    let consumer = Bme280.CreateObserver(fun result -> printfn "Temperature is {result.New.Temperature.Celcius:N2}, Humidity is {}, Pressure is {}")
+    let consumer = Bme280.CreateObserver(fun result -> printfn $"Temperature is {result.New.<Units.Temperature.UnitType.Fahrenheit.ToString>}")
 
     let s = sensor.Subscribe(consumer)
 
