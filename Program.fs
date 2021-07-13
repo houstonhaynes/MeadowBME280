@@ -12,14 +12,18 @@ open Meadow.Foundation.Displays.TftSpi
 type MeadowApp() =
     inherit App<F7Micro, MeadowApp>()
 
+
     do Console.WriteLine "Init with FSharp!"
 
     // set up display
-    let display = new Gc9a01 (MeadowApp.Device, 
+    let display = new St7789 (MeadowApp.Device, 
                                 MeadowApp.Device.CreateSpiBus(),  
                                 MeadowApp.Device.Pins.D02,  
                                 MeadowApp.Device.Pins.D01,  
-                                MeadowApp.Device.Pins.D00 )
+                                MeadowApp.Device.Pins.D00,
+                                240,
+                                240,
+                                Displays.DisplayBase.DisplayColorMode.Format12bppRgb444)
 
     let graphics = GraphicsLibrary(display)
 
@@ -28,11 +32,11 @@ type MeadowApp() =
     let originX = displayWidth / 2
     let originY = displayHeight / 2
 
-    let loadScreen = 
+    let loadScreen (firstColor: Color) (secondColor: Color) = 
         Console.WriteLine "Loading Screen..."
-        graphics.DrawCircle(originX, originY, 125, Color.Green, true, true)
+        graphics.DrawCircle(originX, originY, 125, firstColor, true, true)
         graphics.DrawCircle(originX, originY, 108, Color.Black, true, true)
-        graphics.DrawCircle(originX, originY, 92, Color.Yellow, true, true)
+        graphics.DrawCircle(originX, originY, 92, secondColor, true, true)
         graphics.DrawCircle(originX, originY, 76, Color.Black, true, true)
         graphics.CurrentFont <- Font12x20()
         graphics.DrawRoundedRectangle(7, 98, 225, 44, 8, Color.Black, true)
@@ -40,17 +44,24 @@ type MeadowApp() =
         graphics.DrawText(179, 102, "EZ", Color.HotPink, GraphicsLibrary.ScaleFactor.X2)
         graphics.Show()
 
-    do loadScreen
+    do loadScreen Color.Green Color.Yellow
+    do loadScreen Color.Yellow Color.Red
+    do loadScreen Color.Red Color.Red
+
+
 
 
     // set up sensor
-    let i2c = MeadowApp.Device.CreateI2cBus()
-    let sensor = Bme280 (i2c, Bme280.I2cAddress.Adddress0x76)
-    let consumer = Bme280.CreateObserver(fun result -> printfn $"Temperature is {result.New.<Units.Temperature.UnitType.Fahrenheit.ToString>}")
+    //let i2c = MeadowApp.Device.CreateI2cBus(Hardware.I2cBusSpeed.Fast)
+    //let sensor = Bme280 (i2c, Bme280.I2cAddress.Adddress0x76)
+    //let consumer = Bme280.CreateObserver(fun result -> printfn $"Reading is {result.New}")
 
-    let s = sensor.Subscribe(consumer)
+    // <Units.Temperature.UnitType.Fahrenheit, Units.Pressure.UnitType.Millibar, Units.RelativeHumidity.UnitType.Percent>
 
-    do sensor.StartUpdating(TimeSpan.FromSeconds(2.0))
+    //let s = sensor.Subscribe(consumer)
+
+
+    //do sensor.StartUpdating(TimeSpan.FromSeconds(2.0))
 
     // boilerplate LED stuff
     let led =
