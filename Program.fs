@@ -12,20 +12,16 @@ open Meadow.Foundation.Displays.TftSpi
 type MeadowApp() =
     inherit App<F7Micro, MeadowApp>()
 
-
-    do Console.WriteLine "Init with FSharp!"
+    do Console.WriteLine "Let's get started!"
 
     // set up display
-    let display = new St7789 (MeadowApp.Device, 
-                                MeadowApp.Device.CreateSpiBus(),  
+    let mutable display = new Gc9a01 (MeadowApp.Device, 
+                                MeadowApp.Device.CreateSpiBus(48000L),  
                                 MeadowApp.Device.Pins.D02,  
                                 MeadowApp.Device.Pins.D01,  
-                                MeadowApp.Device.Pins.D00,
-                                240,
-                                240,
-                                Displays.DisplayBase.DisplayColorMode.Format12bppRgb444)
+                                MeadowApp.Device.Pins.D00)
 
-    let graphics = GraphicsLibrary(display)
+    let mutable graphics = GraphicsLibrary(display)
 
     let displayWidth = Convert.ToInt32(display.Width)
     let displayHeight = Convert.ToInt32(display.Height)
@@ -33,23 +29,20 @@ type MeadowApp() =
     let originY = displayHeight / 2
 
     let loadScreen (firstColor: Color) (secondColor: Color) = 
-        Console.WriteLine "Loading Screen..."
+        graphics.CurrentFont <- Font12x20()
         graphics.DrawCircle(originX, originY, 125, firstColor, true, true)
         graphics.DrawCircle(originX, originY, 108, Color.Black, true, true)
         graphics.DrawCircle(originX, originY, 92, secondColor, true, true)
         graphics.DrawCircle(originX, originY, 76, Color.Black, true, true)
-        graphics.CurrentFont <- Font12x20()
         graphics.DrawRoundedRectangle(7, 98, 225, 44, 8, Color.Black, true)
         graphics.DrawText(11, 102, "Breathe", Color.CornflowerBlue, GraphicsLibrary.ScaleFactor.X2)
         graphics.DrawText(179, 102, "EZ", Color.HotPink, GraphicsLibrary.ScaleFactor.X2)
+        Console.WriteLine "Loading Screen..."
         graphics.Show()
 
     do loadScreen Color.Green Color.Yellow
     do loadScreen Color.Yellow Color.Red
     do loadScreen Color.Red Color.Red
-
-
-
 
     // set up sensor
     //let i2c = MeadowApp.Device.CreateI2cBus(Hardware.I2cBusSpeed.Fast)
@@ -60,9 +53,9 @@ type MeadowApp() =
 
     //let s = sensor.Subscribe(consumer)
 
-
     //do sensor.StartUpdating(TimeSpan.FromSeconds(2.0))
 
+    
     // boilerplate LED stuff
     let led =
         RgbPwmLed(MeadowApp.Device, MeadowApp.Device.Pins.OnboardLedRed, MeadowApp.Device.Pins.OnboardLedGreen,
@@ -73,7 +66,6 @@ type MeadowApp() =
         led.StartPulse(color, (duration / 2)) |> ignore
         Threading.Thread.Sleep(int duration) |> ignore
         led.Stop |> ignore
-
 
     let cycleColors duration =
         while true do
@@ -90,7 +82,7 @@ type MeadowApp() =
             showColorPulses Color.Magenta duration
             showColorPulses Color.Pink duration
 
-    do cycleColors 4000
+    do cycleColors 2000
 
 [<EntryPoint>]
 let main argv =
