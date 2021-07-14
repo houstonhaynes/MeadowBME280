@@ -15,13 +15,13 @@ type MeadowApp() =
     do Console.WriteLine "Let's get started!"
 
     // set up display
-    let mutable display = new Gc9a01 (MeadowApp.Device, 
+    let display = new Gc9a01 (MeadowApp.Device, 
                                 MeadowApp.Device.CreateSpiBus(48000L),  
                                 MeadowApp.Device.Pins.D02,  
                                 MeadowApp.Device.Pins.D01,  
                                 MeadowApp.Device.Pins.D00)
 
-    let mutable graphics = GraphicsLibrary(display)
+    let graphics = GraphicsLibrary(display)
 
     let displayWidth = Convert.ToInt32(display.Width)
     let displayHeight = Convert.ToInt32(display.Height)
@@ -29,6 +29,9 @@ type MeadowApp() =
     let originY = displayHeight / 2
 
     let loadScreen (firstColor: Color) (secondColor: Color) = 
+        Console.WriteLine "Clearing Screen..."
+        graphics.Clear()
+        Console.WriteLine "Screen Cleared..."
         graphics.CurrentFont <- Font12x20()
         graphics.DrawCircle(originX, originY, 125, firstColor, true, true)
         graphics.DrawCircle(originX, originY, 108, Color.Black, true, true)
